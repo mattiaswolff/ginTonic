@@ -1,4 +1,4 @@
-nodeProcessCommandLine: "D:\home\site\wwwroot\bin\node.exe"
+nodeProcessCommandLine: "D:\home\site\wwwroot\bin\node103.exe"
 loggingEnabled: true
 debuggingEnabled: true
 devErrorsEnabled: true

@@ -1,0 +1,56 @@
+.ribbon {
+  margin-left: 110px;
+  margin-top: 10px;
+}
+
+.ribbon-wrapper {
+  margin: 50px auto;
+  width: 250px;
+  height: 370px;
+  background: white;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+  -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
+  box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 1;
+}
+.ribbon-outer
+{
+ width:105px;
+ height:108px;
+ overflow:hidden; 
+ position:absolute;
+ top: -3px;
+ right: -3px;
+}
+.ribbon-inner
+{
+background: #e74c3c; /* Old browsers */
+text-align:center; 
+ color:#FFFFFF;   
+ text-align:center; 
+  padding:2px; 
+  width:100px;
+  position:relative; 
+ -webkit-transform: rotate(45deg);
+ -moz-transform: rotate(45deg);
+ -o-transform: rotate(45deg);
+ -ms-transform: rotate(45deg);
+ transform: rotate(45deg);
+}
+.ribbon-inner:before, .ribbon-inner:after {
+  content: "";
+  border-top:   3px solid #CC7A29;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+
+.ribbon-inner:before {
+  left: 0;
+}
+.ribbon-inner:after {
+  right: 0;
+}

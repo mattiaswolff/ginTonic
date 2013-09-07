@@ -1,0 +1,26 @@
+!!!
+html
+  head
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700", type="text/css")
+    link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Open+Sans:300,700", type="text/css")
+
+    link(rel="stylesheet", href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css", type="text/css")
+
+    link(rel="stylesheet", href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css", type="text/css")
+
+    link(rel="stylesheet", href="stylesheets/bootstrap-select.css")
+    link(rel='stylesheet', href='/stylesheets/ribbon.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    
+  body
+    #wrap
+      block content
+    footer#footer
+      .container
+        block footer
+  include js  
+  block javascript

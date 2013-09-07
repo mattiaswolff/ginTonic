@@ -1,0 +1,94 @@
+extends layout
+	
+block content
+	div.container
+		div.row
+			div.span3
+
+				h4 Filter by
+				form#filter
+					label.radio
+						input(type="radio", name="type", value="all", checked="checked") 
+						| All
+					label.radio
+						input(type="radio", name="type", value="Application")
+						| Application
+					label.radio
+						input(type="radio", name="type", value="Platform")
+						| Platform
+					label.radio
+						input(type="radio", name="type", value="Other")
+						| Other
+
+				h4 Sort by
+				form#sort
+					label.radio
+						input(type="radio", name="sort", value="Alphabetical", checked="checked") 
+						| Alphabetical
+					label.radio
+						input(type="radio", name="sort", value="Popular")
+						| Popular
+					label.radio
+						input(type="radio", name="sort", value="Update")
+						| Recent update
+
+				p
+					h4	
+						a(href="/upload") Upload new application 
+
+			div.span9 
+				section#thumbnails
+					ul#applications.thumbnails(data-bind="foreach: applications")
+						li.span3(data-bind= "attr: {'data-type': appCategory, 'data-id': appName}") 
+							div.thumbnail
+								div.ribbon
+									div.ribbon-inner
+										span(data-bind="text: appCategory")
+								p.app-header
+									span(data-bind="text: appFriendlyName", data-type="friendlyName")
+								p.app-description
+									span(data-bind="text: appDescription")	
+								div.app-actions
+									span(data-bind="text: appDownloadCount", data-type="downloadCount")
+									|
+									span(data-bind="text: appLatestUpdate", data-type="latestUpdate")
+									a(data-bind="click: function() { $root.modalSetValues($data) }", href="#myModal", data-toggle="modal")
+										i.icon-info-sign
+
+		div#myModal.modal.fade
+			div.modal-header
+				h3(data-bind="text: modal.modalName")
+			div.modal-body
+				h4 Description
+				p(data-bind="text: modal.modalDescription")
+
+				h4 Links
+				a Source code
+				br
+				a User guides
+				br
+				a Implementation guide 
+
+				h4 Versions
+				div.row
+					div.span3
+						select(data-bind="foreach: modal.modalVersions")
+							option(data-bind="text: versionVersion")
+					div.span3   
+						a.btn.btn-success(data-bind="attr: {'href': modal.modalName}") Download
+
+				h5 Dependencies
+				div(data-bind="foreach: modal.modalDependencies")
+					div.row.dependency_list
+						div.span3
+							span(data-bind="text: dependencyName")
+							|  - 
+							span(data-bind="text: dependencyVersion")
+						div.span3  
+							a.btn.btn-small.btn-success Download
+				h5 Release notes
+
+block footer
+
+block javascript
+	script(src="javascripts/socketio.js")

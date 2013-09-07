@@ -1,0 +1,37 @@
+extends layout
+block content
+	div.container
+		div.row
+			div.span12
+				
+				form.form-inline(method="post", enctype="multipart/form-data", action="/api/applications")
+					fieldset
+						legend Upload to Mediusflow Market
+						.control-group
+							label.control-label Category 
+							.controls
+								select(name="category")
+									option(value="") Current value...
+									option(value="Platform") Platform
+									option(value="Application") Application
+									option(value="QA") QA
+									option(value="Other") Other
+						.control-group
+							label.control-label Package (zip-file)
+							.controls
+								input(type="file", name="applicationPackage")
+						.control-group
+							label.control-label Friendly name
+							.controls
+								input(type="string", name="friendlyName")
+						.control-group
+							label.control-label Description
+							.controls
+								textarea.span6(id="description", name="description", rows="4")
+						.control-group
+							label.control-label Release notes
+							.controls
+								textarea.span6(id="releaseNotes", name="releaseNotes", rows="4")
+						
+						.form-actions
+								button.btn.btn-primary(type="submit") Upload

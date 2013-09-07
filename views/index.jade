@@ -1,0 +1,69 @@
+extends layout
+	
+block content
+	div#myModal.modal.fade
+		div.modal-dialog
+			div.modal-content
+				div.modal-header
+					button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+					h2.modal-title(data-bind="text: modal.modalName")
+				div.modal-body
+					//h3 Description
+					//p(data-bind="text: modal.modalDescription")
+					h3 Versions
+					div.row
+						div.col-12.col-lg-6
+							select.form-control(data-bind="options: modal.modalVersions, optionsText:'versionVersion', value: modal.modalCurrentVersion")
+						div.sm-hidden.col-lg-6(data-bind="with: modal.modalCurrentVersion")
+							a.btn.btn-success(data-bind="attr: {'href': versionDownloadURL}") Download
+					h4 Dependencies
+					div(data-bind="with: modal.modalCurrentVersion")
+						div(data-bind="foreach: versionDependencies")
+							div.row.dependency_list
+								div.col-12.col-lg-6
+									span(data-bind="text: dependencyName")
+									|  - 
+									span(data-bind="text: dependencyVersion")
+								div.sm-hidden.col-lg-6
+									a.btn.btn-small.btn-success(data-bind="attr: {'href': 'api/applications/' + dependencyName() + '/versions/' + dependencyVersion() + '?download=yes'}") Download
+					//h4 Release notes
+	div.container
+		div.row
+			div.col-xs-12.col-sm-3.col-lg-3
+				div.col-xs-12.col-sm-9.col-lg-10
+					form#filter
+						div.form-group
+							select.form-control(name="type", data-style="btn-info")
+								option(value="all") Show all categories
+								option(value="Application") Show applications
+								option(value="Platform") Show platforms
+								option(value="Other") Show other
+				div.col-xs-12.col-sm-9.col-lg-10
+					form#sort
+						div.form-group
+							select.form-control(name="sort")
+								option(value="Alphabetical") Sort alphabetical
+								option(value="Popular") Sort by most popular
+								option(value="Update") Sort by latest updates
+				div.col-xs-12.col-sm-9.col-lg-9.sm-hidden
+					a.btn.btn-success(href="/upload") Upload new application 
+
+			div.col-xs-12.col-sm-9.col-lg-9
+				section#thumbnails
+					div#applications.thumbnails(data-bind="foreach: applications")
+						div.col-xs-12.col-sm-6.col-lg-3(data-bind= "attr: {'data-type': appCategory, 'data-id': appName}")
+							div.thumbnail(data-bind="click: function() { $root.modalSetValues($data) }", href="#myModal", data-toggle="modal")
+								//div.ribbon
+									div.ribbon-inner
+										span(data-bind="text: appCategory")
+								div.app-header
+									h3(data-bind="click: function() { $root.modalSetValues($data) }, text: appFriendlyName", href="#myModal", data-toggle="modal")
+								//div.app-description
+									span(data-bind="text: appDescription")	
+								div.app-actions
+									span.label(data-bind="text: appCategory, css: appCategoryCss")
+									| &nbsp;
+									span.label.label-downloads(data-bind="text: appDownloadCount", data-type="downloadCount")
+									span.hidden(data-bind="text: appLatestUpdate", data-type="latestUpdate")
+block javascript
+	script(src="javascripts/socketio.js")

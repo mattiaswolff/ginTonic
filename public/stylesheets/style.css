@@ -37,6 +37,10 @@ border-radius: 3px;
   background-color: #e74c3c;
 }
 
+.label-edi {
+  background-color: #9b59b6;
+}
+
 .label-downloads {
   background-color: #3498db;
 }

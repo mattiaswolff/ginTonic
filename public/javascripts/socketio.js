@@ -43,6 +43,7 @@ function Application(data) {
   self.appCategoryCss = ko.computed(function() {
     switch (self.appCategory()) {
         case "Application": return "label-application";
+        case "EDI": return "label-edi";
         case "Platform": return "label-platform";
         case "Other": return "label-other";
         default: return "";

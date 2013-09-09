@@ -279,7 +279,10 @@ app.post('/api/applications', function (req, res) {
           callback(err.toString());
         } else {
           if (data) {
-            parsedManifest = data;
+            parsedPackage = data.Package;
+            console.log("---------");
+            console.log(parsedPackage);
+            console.log("---------");
             logHandler('INFO', 'Nodejs', 'Manifest file parsed: ' + manifestRaw);
             callback();
           } else {
@@ -292,7 +295,7 @@ app.post('/api/applications', function (req, res) {
     },
     //Find existing integration in registry or create new one
     function (callback) {
-      applicationsModel.findOne({ name : parsedManifest.Package.Name.toLowerCase() }, function (err, data) {
+      applicationsModel.findOne({ name : parsedPackage.$.Name.toLowerCase() }, function (err, data) {
         if (err) {
           logHandler('ERROR', 'MongoDB', err);
           callback(err);
@@ -300,8 +303,8 @@ app.post('/api/applications', function (req, res) {
           if (!data) {
             //Create new application
             applicationsModel.create({
-              name : parsedManifest.Package.Name.toLowerCase(),
-              friendlyName : parsedManifest.Package.Name.toLowerCase(),
+              name : parsedPackage.$.Name.toLowerCase(),
+              friendlyName : parsedPackage.$.Name.toLowerCase(),
               description : '',
               category : ''
             }, function (err, data) {
@@ -323,10 +326,10 @@ app.post('/api/applications', function (req, res) {
     //Add new version to registry 
     function (callback) {
       if (applicationObject) {
-        version = {version: parsedManifest.Package.Version, dependencies: [], downloadUrl: '', releaseNotes: ''};
-        if (parsedManifest.Package.Dependencies[0].Package) {
-          parsedManifest.Package.Dependencies[0].Package.forEach(function (item) {
-            version.dependencies.push({name: item.Name.toLowerCase(), version: item.Version.toLowerCase()});
+        version = {version: parsedPackage.$.Version, dependencies: [], downloadUrl: '', releaseNotes: ''};
+        if (parsedPackage.Dependecies[0].Package) {
+          parsedPackage.Dependecies[0].Package.forEach(function (item) {
+            version.dependencies.push({name: item.$.Name.toLowerCase(), version: item.$.Version.toLowerCase()});
           });
         }
         version.downloadUrl = config.serverUrlBase + "/api/containers/applications/files/" + applicationObject.name.toLowerCase() + "_" +  version.version.toLowerCase() + ".zip";

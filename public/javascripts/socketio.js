@@ -45,6 +45,7 @@ function Application(data) {
         case "Application": return "label-application";
         case "EDI": return "label-edi";
         case "Platform": return "label-platform";
+        case "Tool": return "label-tool";
         case "Other": return "label-other";
         default: return "";
     }

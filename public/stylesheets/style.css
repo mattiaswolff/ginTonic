@@ -49,6 +49,10 @@ border-radius: 3px;
   background-color: #e67e22;
 }
 
+.label-tool {
+  background-color: #2ecc71;
+}
+
 .label-other {
   background-color: #2ecc71;
 }

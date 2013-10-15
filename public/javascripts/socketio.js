@@ -44,6 +44,7 @@ function Application(data) {
     switch (self.appCategory()) {
         case "Application": return "label-application";
         case "EDI": return "label-edi";
+        case "MIG": return "label-mig";
         case "Platform": return "label-platform";
         case "Tool": return "label-tool";
         case "Other": return "label-other";

@@ -41,6 +41,10 @@ border-radius: 3px;
   background-color: #9b59b6;
 }
 
+.label-mig {
+  background-color: #1abc9c;
+}
+
 .label-downloads {
   background-color: #3498db;
 }
